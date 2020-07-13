@@ -17,6 +17,7 @@ from users.forms import ProfileForm
 
 # Create your views here.
 
+@login_required
 def update_profile(request):
     """update a user's profile view"""
     profile = request.user.profile
@@ -24,7 +25,7 @@ def update_profile(request):
         form = ProfileForm(request.POST, request.FILES)
         if form.is_valid():
             data = form.cleaned_data
-            
+
             profile.website = data['website']
             profile.phone_number = data['phone_number']
             profile.biography = data['biography']
