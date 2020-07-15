@@ -18,17 +18,12 @@ class ProfileCompletionMiddleware:
 
     def __call__(self, request):
         """Code to be executed for each request before the view is called."""
-
-        # valida que el usuario sea administrador y permite que la solicitud continue
-        if request.user.is_superuser:
-            return self.get_response(request)
-
         if not request.user.is_anonymous:
             if not request.user.is_staff:
                 profile = request.user.profile
                 if not profile.picture or not profile.biography:
-                    if request.path not in [reverse('update_profile'), reverse('logout')]:
-                        return redirect('update_profile')
+                    if request.path not in [reverse('users:update'), reverse('users:logout')]:
+                        return redirect('users:update')
 
         response = self.get_response(request)
         return response

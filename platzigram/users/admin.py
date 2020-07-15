@@ -8,6 +8,7 @@ from django.contrib import admin
 from django.contrib.auth.models import User
 from users.models import Profile
 
+
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
     """Profile admin."""
@@ -48,6 +49,7 @@ class ProfileAdmin(admin.ModelAdmin):
 
     readonly_fields = ('created', 'modified',)
 
+
 class ProfileInline(admin.StackedInline):
     """Profile in-line admin for users."""
 
@@ -69,8 +71,6 @@ class UserAdmin(BaseUserAdmin):
         'is_staff'
     )
 
+
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
-
-
-    
